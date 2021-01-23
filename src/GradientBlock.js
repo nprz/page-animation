@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Style
 import styled, { css } from "styled-components";
@@ -92,14 +92,9 @@ function renderTextBlocks() {
   return new Array(horizontalDivisions).fill(<TextBlock>NPRZ.IO</TextBlock>);
 }
 
-function GradientBlock({
-  setEnter,
-  setHomeVisible,
-  setTransitionEnd,
-  enter,
-  homeVisible,
-  transitionEnd,
-}) {
+function GradientBlock({ setEnter, enter }) {
+  const [homeVisible, setHomeVisible] = useState(false);
+  const [transitionEnd, setTransitionEnd] = useState(false);
   const blockContainerRef = useRef(null);
   const endingBlockContainerRef = useRef(null);
 
