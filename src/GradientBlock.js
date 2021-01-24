@@ -89,7 +89,10 @@ function renderBlocks() {
 }
 
 function renderTextBlocks() {
-  return new Array(horizontalDivisions).fill(<TextBlock>NPRZ.IO</TextBlock>);
+  // TODO add keys
+  const textBlocks = new Array(horizontalDivisions).fill(
+    <TextBlock>NPRZ.IO</TextBlock>
+  );
 }
 
 function GradientBlock({ setEnter, enter }) {
@@ -126,7 +129,7 @@ function GradientBlock({ setEnter, enter }) {
     }
   }, []);
 
-  // on transitionEnd destroy this
+  // turn this into a hook, returns component, enter, and setEnter
   return (
     <Container transitionEnd={transitionEnd}>
       <TextBlockContainer enter={enter} exit={homeVisible}>
