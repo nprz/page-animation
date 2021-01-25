@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // Style
 import styled from "styled-components";
 
-import GradientBlock from "./GradientBlock";
+import useGradientBlock from "./GradientBlock";
 
 const Container = styled.div`
   height: 100vh;
@@ -15,7 +15,10 @@ const Container = styled.div`
 `;
 
 function App() {
-  const [enter, setEnter] = useState(false);
+  // const [enter, setEnter] = useState(false);
+  const { GradientBlock, setEnter, enter } = useGradientBlock();
+
+  console.log({ GradientBlock });
 
   function handleClick() {
     setEnter(true);
@@ -26,7 +29,7 @@ function App() {
       <Container>
         <button onClick={handleClick}>click</button>
       </Container>
-      <GradientBlock setEnter={setEnter} enter={enter} />
+      <GradientBlock enter={enter} setEnter={setEnter} />
     </>
   );
 }

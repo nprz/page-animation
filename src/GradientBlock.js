@@ -89,10 +89,7 @@ function renderBlocks() {
 }
 
 function renderTextBlocks() {
-  // TODO add keys
-  const textBlocks = new Array(horizontalDivisions).fill(
-    <TextBlock>NPRZ.IO</TextBlock>
-  );
+  return new Array(horizontalDivisions).fill(<TextBlock>NPRZ.IO</TextBlock>);
 }
 
 function GradientBlock({ setEnter, enter }) {
@@ -101,6 +98,8 @@ function GradientBlock({ setEnter, enter }) {
   const blockContainerRef = useRef(null);
   const endingBlockContainerRef = useRef(null);
 
+  console.log({ enter, homeVisible, transitionEnd });
+
   useEffect(() => {
     if (transitionEnd) {
       // maybe just store these in a single object
@@ -108,7 +107,7 @@ function GradientBlock({ setEnter, enter }) {
       setHomeVisible(false);
       setEnter(false);
     }
-  }, [transitionEnd]);
+  }, [transitionEnd, setEnter]);
 
   useEffect(() => {
     // Make this work in other browsers
@@ -129,7 +128,6 @@ function GradientBlock({ setEnter, enter }) {
     }
   }, []);
 
-  // turn this into a hook, returns component, enter, and setEnter
   return (
     <Container transitionEnd={transitionEnd}>
       <TextBlockContainer enter={enter} exit={homeVisible}>
@@ -145,7 +143,15 @@ function GradientBlock({ setEnter, enter }) {
   );
 }
 
-export default GradientBlock;
+export default function useGradientBlock() {
+  const [enter, setEnter] = useState(false);
+
+  return {
+    GradientBlock,
+    enter,
+    setEnter,
+  };
+}
 
 /* 
 What is going on
