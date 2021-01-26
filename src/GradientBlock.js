@@ -98,8 +98,6 @@ function GradientBlock({ setEnter, enter }) {
   const blockContainerRef = useRef(null);
   const endingBlockContainerRef = useRef(null);
 
-  console.log({ enter, homeVisible, transitionEnd });
-
   useEffect(() => {
     if (transitionEnd) {
       // maybe just store these in a single object
@@ -128,6 +126,7 @@ function GradientBlock({ setEnter, enter }) {
     }
   }, []);
 
+  // turn this into a hook, returns component, enter, and setEnter
   return (
     <Container transitionEnd={transitionEnd}>
       <TextBlockContainer enter={enter} exit={homeVisible}>

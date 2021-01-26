@@ -15,10 +15,7 @@ const Container = styled.div`
 `;
 
 function App() {
-  // const [enter, setEnter] = useState(false);
   const { GradientBlock, setEnter, enter } = useGradientBlock();
-
-  console.log({ GradientBlock });
 
   function handleClick() {
     setEnter(true);
