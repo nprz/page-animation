@@ -55,7 +55,6 @@ const TextBlockContainer = styled.div`
     `}
 `;
 
-// 12 blocks, this could/should be passed as a prop from parent.
 const Block = styled.div`
   height: calc(100vh / 12);
   background-color: #ff5733;
@@ -78,7 +77,6 @@ const TextBlock = styled.div`
 const horizontalDivisions = 12;
 
 function renderBlocks() {
-  // TODO: make this better.
   const textBlocks = [];
   let opacity = 1;
   for (let i = 0; i < horizontalDivisions; i++) {
@@ -100,7 +98,6 @@ function GradientBlock({ setEnter, enter }) {
 
   useEffect(() => {
     if (transitionEnd) {
-      // maybe just store these in a single object
       setTransitionEnd(false);
       setHomeVisible(false);
       setEnter(false);
@@ -108,8 +105,6 @@ function GradientBlock({ setEnter, enter }) {
   }, [transitionEnd, setEnter]);
 
   useEffect(() => {
-    // Make this work in other browsers
-    // also need to clean this up, kill listener on unmount
     if (blockContainerRef.current) {
       blockContainerRef.current.addEventListener("webkitTransitionEnd", () => {
         setHomeVisible(true);
@@ -126,7 +121,6 @@ function GradientBlock({ setEnter, enter }) {
     }
   }, []);
 
-  // turn this into a hook, returns component, enter, and setEnter
   return (
     <Container transitionEnd={transitionEnd}>
       <TextBlockContainer enter={enter} exit={homeVisible}>
@@ -151,29 +145,3 @@ export default function useGradientBlock() {
     setEnter,
   };
 }
-
-/* 
-What is going on
-Passed from parent component:
-- setHomeVisible --> sets parent component visible
-- setTransitionEnd
-- transitionEnd
-
-Order of things: 
- setEnter(true) --> component mounts
- BlockContainer (blockContainerRef) begins 24 step animation over 1.2s (moves fully off screen)
- TextBlockContainer begins 12 step animation over .6s (remains on screen)
- blockContainerRef webkitTransitionEnd event runs, setting exit and homeVisible to true
- PARENT COMPONENT: opacity set to 1
- endingBlockContainer begins 24 step animation over 1.2s
- TextBlockContainer begins 12 step animation over .6s (removed from screen)
- endingBlockContainer webkitTransitionEnd event runs, setting setTransitionEnd to true
- Container display set to none
- PARENT COMPONENT: height set to auto, overflow set to scroll
-*/
-
-/* 
-  enter
-  homeVisible
-  transitionEnd
- */
