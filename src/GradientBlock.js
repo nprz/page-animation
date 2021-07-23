@@ -68,7 +68,6 @@ const TextBlock = styled.div`
   height: calc(100vh / 12);
   font-size: 28px;
   background-color: white;
-  
 
   @media (max-height: 500px) {
     font-size: 20px;
