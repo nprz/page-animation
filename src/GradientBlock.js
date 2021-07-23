@@ -68,6 +68,7 @@ const TextBlock = styled.div`
   height: calc(100vh / 12);
   font-size: 28px;
   background-color: white;
+  
 
   @media (max-height: 500px) {
     font-size: 20px;
@@ -86,11 +87,11 @@ function renderBlocks() {
   return textBlocks;
 }
 
-function renderTextBlocks() {
-  return new Array(horizontalDivisions).fill(<TextBlock>NPRZ.IO</TextBlock>);
+function renderTextBlocks(title) {
+  return new Array(horizontalDivisions).fill(<TextBlock>{title}</TextBlock>);
 }
 
-function GradientBlock({ setEnter, enter }) {
+function GradientBlock({ setEnter, enter, title }) {
   const [homeVisible, setHomeVisible] = useState(false);
   const [transitionEnd, setTransitionEnd] = useState(false);
   const blockContainerRef = useRef(null);
@@ -124,7 +125,7 @@ function GradientBlock({ setEnter, enter }) {
   return (
     <Container transitionEnd={transitionEnd}>
       <TextBlockContainer enter={enter} exit={homeVisible}>
-        {renderTextBlocks()}
+        {renderTextBlocks(title)}
       </TextBlockContainer>
       <BlockContainer exit={homeVisible} ref={endingBlockContainerRef}>
         {renderBlocks()}

@@ -26,7 +26,7 @@ function App() {
       <Container>
         <button onClick={handleClick}>click</button>
       </Container>
-      <GradientBlock enter={enter} setEnter={setEnter} />
+      <GradientBlock enter={enter} setEnter={setEnter} title="NPRZ.IO" />
     </>
   );
 }
